@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2? family= Roboto:wght@100 & display=swap');
+
+/* https://www.csscolorpalettes.com/palettes/320#palette */
+
+
+/* COLORS */
+:root {
+    --Primary: #3a4750;
+    --Secondary: #ff0008;
+    --Tertiary: #d81f26;
+    --Fourth: #d3d6db;
+    --White: white;
+    --Default: #3a47504d;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+    background-color: var(--Primary);
+
+}
+body{
+    font: 1.6rem 'Roboto', sans-serif;
+    font-weight: bold; 
+}
+
+
+/* HEADER */
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 2.5rem;
+    margin-right: 10rem;
+}
+header img{
+    max-width: 15rem;
+    margin-top: 3rem;
+}
+header h1{
+    font-size: 5rem;
+    padding: 2.5rem;
+    color: var(--White);
+    border: 0.5rem solid var(--Default);
+    border-radius: 1.5rem;
+    text-shadow: var(--Primary) 5px 5px;
+    background-color: var(--Tertiary);  
+    text-align: center;
+}
+.material-icons.md-48{
+    cursor: pointer;
+    font-size: 48px;
+    margin-right: -rem;
+}
+
+/* MAIN */
+main h2 {
+    text-align: center;
+    line-height: 3.5rem;
+    margin-top: 3rem;
+    color: var(--White);
+    font-size: 3rem;
+}
+main h3:first-of-type{
+    text-align: center;
+    margin: 4rem auto 3rem;
+    line-height: 2.5rem;
+    color: var(--White);
+    text-transform: uppercase;
+}
+main .grid-picture-large {
+    display: grid;
+    padding: 2.5rem;
+    margin: 0rem auto;
+    grid-template-columns: repeat(4,1fr);    /* 4 colonnes dans (une fraction = ( ligne)) */
+    grid-gap: 2.5rem;
+    background-color: var(--Tertiary);
+    border-radius: 1rem;
+    max-width: 120rem;
+}
+main ul li img{
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+}
+/* scroll bars */
+*{
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255, 2, 2) var(--Primary);
+}
+*::-webkit-scrollbar {
+    width: 0.8rem;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 0, 0);
+}
+
+
+/* light_mode */
+.light{
+    background-color: var(--Fourth);
+    transition: all 0.3s ease-in;
+}
+.light main h2:first-child, .light main h3:first-of-type{
+    color: var(--Primary);
+}
+.light header h1{
+    color: var(--Primary);
+    background-color: var(--White);
+    text-shadow: none;
+    transition: all 0.6s ease-in;
+} 
+.light main .grid-picture-large {
+    background-color: var(--Primary);
+    transition: all 0.6s ease-in;
+}
+.light main a{
+    color: var(--White);
+    background-color: var(--Primary);
+}
+.light footer p{
+    color: var(--Primary);
+}
+
+
+/* Overlay effect */
+ul figure{
+    position: relative;
+}
+ul figure .material-icons{
+    vertical-align: -.4rem;
+}
+ul figure figcaption{
+    display: grid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.6);
+    align-items: center;
+    transform: scale(0);
+    transition: all 500ms ease-in-out;
+    transform-origin: center center;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}
+ul figure:hover figcaption{
+    transform: scale(1);
+}
+/* modale */
+.parent-modale{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.4s ease-in-out;
+}
+.parent-modale .modale{
+    width: 39rem;
+    padding: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 0 1rem rgba(0,0,0,0.6);
+    z-index: 2;
+    cursor: pointer;   
+}
+.parent-modale .modale .desc{
+    position: static;
+    transition: none;
+    width: 100%;
+    background-color: #fff;
+    color: #222; 
+}
+.modale-active{
+    z-index: 1;
+    opacity: 1;
+    transform-origin: center center;
+}
+.parent-modale .modale .desc h3:last-of-type{
+    text-transform: capitalize;
+    font-weight: 400;
+    background-color: #222;
+    color: #fff;
+    padding: 1rem;
+}
+.parent-modale .modale img{
+	width: 100%;
+	height: 100%;
+}
+.parent-modale .modale .desc p :is(time){
+    padding: 1rem;
+}
+.parent-modale .modale button{
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    z-index: 2;
+    color: #333;
+    cursor: pointer;
+        background-color:rgba(240, 240, 240, 0.5);
+        border-radius: 0.5rem;
+}
+main a{
+	display: block;
+	margin: 3rem auto;
+    color: #fff;
+    background-color: var(--Tertiary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding-top: 1.25rem;
+    max-width: 30rem;
+    height: 4.5rem;
+}
+
+
+/* FOOTER */
+footer p {
+    font-size: 2rem;
+    color:var(--White);
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 85rem){
+    header img{
+        margin: 0 auto 0rem 3rem;
+    }
+    header h1{
+        text-align: center;
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+
+    main .grid-picture-large{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+@media screen and (max-width: 64rem) {
+    header{
+        display: block;
+        margin-top: 4rem;
+        margin-right: -10rem;
+    }
+    header img{
+        display: block;
+        margin: 0rem auto;
+    }
+    header h1{
+        font-size: 3rem;
+        margin: 2.5rem auto;
+    }
+    header span{
+        margin: 2.5 auto;
+    }
+}
+@media screen and (max-width: 45rem) {
+    main .grid-picture-large{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
