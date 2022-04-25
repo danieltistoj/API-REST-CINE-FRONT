@@ -1,15 +1,37 @@
 import axios from "axios";
+import { useState, useEffect, createContext } from "react";
 
-const ObtenerPelicula = () => {
-    const [nombre, setNombre] = useState("");
-    const [categoria, setCategoria] = useState("");
-    const [director, setDirector] = useState("");
-    const [duracion, setDuracion] = useState("");
-    const [imagen, setImagen] = useState("");
-    const [modificador, setModificar] = useState("");
 
-    //Registrar pelicula
+
+const PeliculaContext = () => {
+
+
+  useEffect(() => {
+    const obtenerPeliculas = async () => {
+       //Todos pelicula
     try {
+      const token = localStorage.getItem("token");
+      if (!token) return;
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await clienteAxios.post("/pelicula/todos", nombre, categoria, director, duracion, imagen, modificador);
+      console.log(data);
+     
+    } catch (error) {
+      console.log(error);
+    }
+    };
+    obtenerPeliculas();
+  }, []);
+
+
+    const registrarPelicula = async (pelicula) => {
+        //Registrar pelicula
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -18,15 +40,19 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/registrar", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post("/pelicula/registrar", pelicula, config);
         console.log(data);
        
       } catch (error) {
         console.log(error);
       }
+    }
+  
+    
 
+    const peliculaID = async (id) => {
       //ID pelicula
-    try {
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -35,15 +61,17 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/getID/:id", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post(`/pelicula/getId/${id}`, config);
         console.log(data);
-       
+      
       } catch (error) {
         console.log(error);
       }
-
+  }
+     
+    const getNombrePelicula = async (nombre) => {
       //Nombre pelicula
-    try {
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -52,15 +80,38 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/getNombre/:nombre", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post(`/pelicula/getNombre/${nombre}`, config);
         console.log(data);
-       
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+      
+    const getCategoriaPelicula = async(categoria) => {
+          //Categoria pelicula
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const { data } = await clienteAxios.post(`/pelicula/getCategoria/${categoria}`,config);
+        console.log(data);
+      
       } catch (error) {
         console.log(error);
       }
 
-      //Categoria pelicula
-    try {
+    }
+    
+
+    const getDirectorPelicula = async (director) => {
+        //Director pelicula
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -69,32 +120,19 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/getCategoria/:categoria", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post(`/pelicula/getDirector/${director}`, config);
         console.log(data);
-       
+      
       } catch (error) {
         console.log(error);
       }
 
-      //Director pelicula
-    try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await clienteAxios.post("/pelicula/getDirector/:director", nombre, categoria, director, duracion, imagen, modificador);
-        console.log(data);
-       
-      } catch (error) {
-        console.log(error);
-      }
+    }
+     
 
-        //Update pelicula
-    try {
+    const updatePelicula = async (pelicula) => {
+          //Update pelicula
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -103,15 +141,18 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/update/:id", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post(`/pelicula/update/${pelicula._id}`, pelicula, config);
         console.log(data);
-       
+      
       } catch (error) {
         console.log(error);
       }
+    }
+     
 
-      //Delete pelicula
-    try {
+    const deletePelicula = async (id) => {
+          //Delete pelicula
+      try {
         const token = localStorage.getItem("token");
         if (!token) return;
         const config = {
@@ -120,27 +161,24 @@ const ObtenerPelicula = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await clienteAxios.post("/pelicula/delete/:id", nombre, categoria, director, duracion, imagen, modificador);
+        const { data } = await clienteAxios.post(`/pelicula/delete/${id}`,config);
         console.log(data);
-       
+      
       } catch (error) {
         console.log(error);
       }
+    }
 
-      //Todos pelicula
-    try {
-        const token = localStorage.getItem("token");
-        if (!token) return;
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        };
-        const { data } = await clienteAxios.post("/pelicula/todos", nombre, categoria, director, duracion, imagen, modificador);
-        console.log(data);
-       
-      } catch (error) {
-        console.log(error);
-      }
-}
+
+    return (
+      registrarPelicula,
+      peliculaID,
+      getNombrePelicula,
+      getCategoriaPelicula,
+      getDirectorPelicula,
+      updatePelicula,
+      deletePelicula
+    )
+};
+
+export default PeliculaContext;
