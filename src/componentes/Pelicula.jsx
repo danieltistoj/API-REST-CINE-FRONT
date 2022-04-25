@@ -2,8 +2,8 @@ import React from 'react'
 import '../css/style.css'
 import red from '../assets/images/red.jpeg';
 
-const Pelicula = () => {
-  return (
+const Pelicula = () => { //es una función
+    return (
     <>
      <li data-image={red} data-title="Ant-Man"
                     data-description="Es una película increíble, entre la acción y la emoción..." data-dates="02/01/2020">
